@@ -154,7 +154,7 @@
         }
 
         body.light-mode .btn-outline-light {
-            color: var(--primary-color) !important;
+            color: var(--text-light);
             border-color: var(--primary-color) !important;
         }
 
