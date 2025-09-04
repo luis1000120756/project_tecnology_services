@@ -21,6 +21,14 @@
                 <form action="{{ route('auth.login') }}" method="POST" id="formLogin"
                     class="w-100 text-white position-relative">
                     @csrf
+                    @if (!empty($successMessage))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="bi bi-check-circle-fill"></i>
+                            {{ $successMessage }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Cerrar"></button>
+                        </div>
+                    @endif
                     <div class="mb-3 text-start">
                         <label class="form-label">Nombre de usuario</label>
                         <input type="text" id="inputName" name="nameUser" class="form-control"

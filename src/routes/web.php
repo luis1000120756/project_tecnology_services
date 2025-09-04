@@ -19,7 +19,7 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::prefix('user')->group(function () {
-    Route::get('/register', [UserController::class, 'registerForm'])->name('user.register');
+    // Route::get('/register', [UserController::class, 'registerForm'])->name('user.register');
     Route::post('/register', [UserController::class, 'registerUser'])->name('user.register');
 });
 
