@@ -540,18 +540,19 @@
                         aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="formRegister">
+                    <form id="formRegister" method="POST" action="{{ route('user.register') }}">
+                        @csrf
                         <div class="mb-3">
                             <label for="reg-nombre" class="form-label">Nombre completo</label>
-                            <input type="text" class="form-control" id="reg-nombre" required>
+                            <input type="text" class="form-control" id="reg-nombre" name="nameUser" required>
                         </div>
                         <div class="mb-3">
                             <label for="reg-email" class="form-label">Correo electrónico</label>
-                            <input type="email" class="form-control" id="reg-email" required>
+                            <input type="email" class="form-control" id="reg-email" name="email" required>
                         </div>
                         <div class="mb-3">
                             <label for="reg-password" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="reg-password" required>
+                            <input type="password" class="form-control" id="reg-password" name="password" required>
                         </div>
                         <div class="d-grid gap-2">
                             <button type="submit" id="btnRegistrar" class="btn btn-primary btn-main">
@@ -744,6 +745,14 @@
                 </div>
             </div>
         </section>
+        @if (!empty($successMessage))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="bi bi-check-circle-fill"></i>
+                {{ $successMessage }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+            </div>
+        @endif
+
 
         <section class="section-padding" id="noticias">
             <div class="container">
@@ -887,6 +896,10 @@
 
             // Verificar el tema guardado en el Local Storage
             const savedTheme = localStorage.getItem('theme');
+            @if (!empty($successMessage))
+                const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                loginModal.show();
+            @endif
             if (savedTheme === 'light-mode') {
                 body.classList.add('light-mode');
                 icon.classList.remove('fa-moon');
@@ -963,6 +976,7 @@
                     });
                 });
             }
+
         });
     </script>
 </body>

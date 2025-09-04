@@ -19,7 +19,7 @@ class UserController extends Controller
         $request->validate([
             'nameUser' => 'required|string|max:255', // 👈 Debe validar nameUser, no name
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:8',
         ]);
         $generateCodeVerificaEmail = Str::random(4);
         $user = User::create([
@@ -28,6 +28,8 @@ class UserController extends Controller
             'code_verification' => $generateCodeVerificaEmail,
             'password' => bcrypt($request->password),
         ]);
-        return redirect()->route('auth.login')->with('successMessage', 'Usuario registrado con éxito puedes iniciar sesión');        // dd($user);
+        return view('pagePrincipal.page-principal', [
+            'successMessage' => 'Usuario registrado con éxito puedes iniciar sesión'
+        ]);
     }
 }
