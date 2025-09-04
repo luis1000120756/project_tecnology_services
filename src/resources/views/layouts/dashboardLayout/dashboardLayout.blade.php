@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{{ asset('img/IconSuarPol.png') }}" type="image/png">
+    <title>@yield('title', 'Dashboard - SuarPol')</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --dark-bg: #1a1a2e;
+            --card-bg: #222533;
+            --text-light: #f0f0f0;
+            --gradient-main: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            --sidebar-width: 250px;
+        }
+
+        /* Modo claro */
+        body.light-mode {
+            --dark-bg: #ffffff;
+            --card-bg: #f8f9fa;
+            --text-light: #212529;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--card-bg);
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out, background-color 0.3s;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        /* Main content */
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            margin-left: var(--sidebar-width);
+            transition: margin-left 0.3s ease-in-out, background-color 0.3s, color 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.show {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-header .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .sidebar-header img {
+            max-width: 50px;
+            margin-right: 10px;
+        }
+
+        .sidebar-header h4 {
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .sidebar-menu-item a {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s, color 0.3s;
+            font-weight: 600;
+        }
+
+        .sidebar-menu-item a:hover,
+        .sidebar-menu-item a.active {
+            background-color: rgba(0, 123, 255, 0.2);
+            color: var(--primary-color);
+        }
+
+        .sidebar-menu-item a i {
+            margin-right: 15px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-footer {
+            padding: 20px;
+        }
+
+        .navbar-top {
+            background-color: var(--card-bg);
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .navbar-top .navbar-brand {
+            font-weight: 700;
+            color: var(--text-light);
+            font-size: 1.25rem;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .user-dropdown-btn {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 0;
+        }
+
+        .user-dropdown-btn i {
+            margin-right: 8px;
+        }
+
+        .user-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--card-bg);
+            min-width: 180px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            right: 0;
+            border-radius: 10px;
+            padding: 10px 0;
+            margin-top: 10px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .user-dropdown-content a,
+        .user-dropdown-content button {
+            color: var(--text-light);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .user-dropdown-content a:hover,
+        .user-dropdown-content button:hover {
+            background-color: rgba(0, 123, 255, 0.2);
+            color: var(--primary-color);
+        }
+
+        .user-dropdown:hover .user-dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="#" class="logo-container">
+                    <img src="{{ asset('img/IconSuarPol.png') }}" alt="Logo">
+                    <h4>SuarPol</h4>
+                </a>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="sidebar-menu-item"><a href="#" class="active"><i class="fas fa-home"></i> Inicio</a>
+                </li>
+                <li class="sidebar-menu-item"><a href="#"><i class="fas fa-box-open"></i> Gestión de Productos</a>
+                </li>
+                <li class="sidebar-menu-item"><a href="#"><i class="fas fa-wrench"></i> Gestión de Servicios</a>
+                </li>
+                <li class="sidebar-menu-item"><a href="#"><i class="fas fa-newspaper"></i> Gestión de Noticias</a>
+                </li>
+                <li class="sidebar-menu-item"><a href="#"><i class="fas fa-users"></i> Gestión de Clientes</a>
+                </li>
+                <li class="sidebar-menu-item"><a href="{{ route('dashboard.catalog.products') }}"><i
+                            class="fas fa-tags"></i> Catálogo de Productos</a></li>
+                <li class="sidebar-menu-item"><a href="#"><i class="fas fa-shopping-cart"></i> App Web para
+                        Vender</a></li>
+            </ul>
+            <div class="mt-auto sidebar-footer">
+                <form action="{{ route('auth.logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-danger w-100">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    </button>
+                </form>
+            </div>
+        </aside>
+
+        <main class="main-content" id="main-content">
+            <nav class="navbar-top">
+                <button class="toggle-btn" id="toggle-sidebar"><i class="fas fa-bars"></i></button>
+                <div class="navbar-brand d-none d-md-block">Bienvenido</div>
+                <span class="d-md-none fs-2">Bienvenido</span>
+
+                <div class="d-flex align-items-center">
+                    <!-- Botón de modo claro/oscuro -->
+                    <button id="toggleTheme" class="btn btn-outline-light me-3">
+                        <i class="fas fa-sun"></i>
+                    </button>
+
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn"><i class="fas fa-user-circle"></i> Usuario
+                            Administrador</button>
+                        <div class="user-dropdown-content">
+                            <a href="#"><i class="fas fa-user-cog"></i> Perfil</a>
+                            <form action="{{ route('auth.logout') }}" method="POST">
+                                @csrf
+                                <button type="submit"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            @yield('content')
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.getElementById('toggle-sidebar');
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('main-content');
+            const userDropdown = document.querySelector('.user-dropdown-btn');
+            const userDropdownContent = document.querySelector('.user-dropdown-content');
+            const themeBtn = document.getElementById("toggleTheme");
+            const body = document.body;
+
+            // Sidebar toggle
+            toggleBtn?.addEventListener('click', () => sidebar.classList.toggle('show'));
+
+            function handleSidebar() {
+                if (window.innerWidth >= 768) {
+                    sidebar.classList.remove('show');
+                    mainContent.classList.remove('expanded');
+                } else {
+                    sidebar.classList.add('collapsed');
+                    mainContent.classList.add('expanded');
+                }
+            }
+            handleSidebar();
+            window.addEventListener('resize', handleSidebar);
+
+            userDropdown?.addEventListener('click', () => userDropdownContent.classList.toggle('d-block'));
+
+            // =========================
+            // Dark/Light Theme Toggle
+            // =========================
+            if (localStorage.getItem("theme") === "light") {
+                body.classList.add("light-mode");
+                themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+            } else {
+                themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+
+            themeBtn?.addEventListener("click", () => {
+                body.classList.toggle("light-mode");
+                if (body.classList.contains("light-mode")) {
+                    localStorage.setItem("theme", "light");
+                    themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+                } else {
+                    localStorage.setItem("theme", "dark");
+                    themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
