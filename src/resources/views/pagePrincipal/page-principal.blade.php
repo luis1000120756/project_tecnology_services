@@ -850,7 +850,7 @@
                 <div class="col-md-4 mb-4 mb-md-0">
                     <h5>Enlaces Rápidos</h5>
                     <ul class="list-unstyled footer-links">
-                        <li><a href="#productos">Productos</a></li>
+                        <li><a href="#productos">Productoss</a></li>
                         <li><a href="#servicios">Servicios</a></li>
                         <li><a href="#software">Software</a></li>
                         <li><a href="#noticias">Noticias</a></li>
