@@ -33,6 +33,7 @@
         @forelse ($products as $product)
             <div class="col-12 col-md-6 col-lg-3 mb-4">
                 @include('components.products.cardProduct', [
+                    'id' => $product->id,
                     'image' => $product->first_image_url,
                     'title' => $product->title,
                     'category' => $product->category,

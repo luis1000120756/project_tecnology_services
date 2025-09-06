@@ -44,4 +44,14 @@ class ProductController extends Controller
         ]);
         return redirect()->back()->with('productNew', $product);
     }
+
+    public function getProductById($id)
+    {
+        $product = Product::find($id);
+        if (!$product) {
+            return redirect()->back()->with('error', 'Producto no encontrado');
+        }
+        // dd($product->image_path);
+        return view('dashboardCli.productsPage.productDetail', compact('product'));
+    }
 }

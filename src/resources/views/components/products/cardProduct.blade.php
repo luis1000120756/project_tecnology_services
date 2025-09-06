@@ -7,10 +7,10 @@
         <p class="card-text text-secondary mb-3">{{ $category }}</p>
         <div class="mt-auto">
             <!-- Botón con spinner -->
-            <button type="button" class="btn btn-primary w-100 btn-save">
+            <a href="{{ route('dashboard.catalog.products.id', $id) }}" class="btn btn-primary w-100 btn-save">
                 <span class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true"></span>
-                <span class="btn-text">Guardar</span>
-            </button>
+                Ver más
+            </a>
         </div>
     </div>
 </div>

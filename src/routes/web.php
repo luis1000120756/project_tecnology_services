@@ -19,7 +19,7 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::prefix('user')->group(function () {
-    Route::get('/register', [UserController::class, 'registerForm'])->name('user.register');
+    // Route::get('/register', [UserController::class, 'registerForm'])->name('user.register');
     Route::post('/register', [UserController::class, 'registerUser'])->name('user.register');
 });
 
@@ -28,6 +28,7 @@ Route::prefix('dashboardCli')->group(function () {
     Route::get('/', [dashboardCliController::class, 'index'])->name('dashboard.cli')->middleware('auth');
     Route::get('/products', [dashboardCliController::class, 'getProducts'])->name('dashboard.catalog.products')->middleware('auth');
     Route::post('/products', [ProductController::class, 'createProduct'])->name('dashboard.catalog.products.create')->middleware('auth');
+    Route::get('/products/{id}', [ProductController::class, 'getProductById'])->name('dashboard.catalog.products.id')->middleware('auth');
 });
 
 Route::get('/layout', function () {
