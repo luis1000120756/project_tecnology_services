@@ -17,16 +17,19 @@ class Product extends Model
         'image_path',
     ];
 
-    // Mutador: convierte el campo image_path en array automáticamente
+    // Convierte el campo image_path en array automáticamente
     protected $casts = [
         'image_path' => 'array',
     ];
+
+    // 👇 Esto hace que el atributo calculado siempre aparezca en JSON
+    protected $appends = ['first_image_url'];
 
     // Accesor: devuelve la primera imagen o una por defecto
     public function getFirstImageUrlAttribute()
     {
         if (is_array($this->image_path) && count($this->image_path) > 0) {
-            return asset('storage/' . $this->image_path[0]); 
+            return asset('storage/' . $this->image_path[0]);
         }
 
         // Imagen por defecto si no hay ninguna

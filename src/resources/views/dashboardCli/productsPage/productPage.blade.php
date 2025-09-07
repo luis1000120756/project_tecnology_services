@@ -29,7 +29,7 @@
     </div>
 
     {{-- Grid de productos --}}
-    <div class="row">
+    <div class="row" id="productsGrid">
         @forelse ($products as $product)
             <div class="col-12 col-md-6 col-lg-3 mb-4">
                 @include('components.products.cardProduct', [
@@ -45,6 +45,7 @@
                 <p>No hay productos disponibles.</p>
             </div>
         @endforelse
+
     </div>
 
     <script>

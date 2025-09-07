@@ -54,4 +54,23 @@ class ProductController extends Controller
         // dd($product->image_path);
         return view('dashboardCli.productsPage.productDetail', compact('product'));
     }
+
+    public function filterProducts(Request $request)
+    {
+        $query = Product::query();
+
+        if ($request->category && $request->category !== 'Todas las categorías') {
+            $query->where('category', $request->category);
+        }
+        if ($request->minPrice) {
+            $query->where('price', '>=', $request->minPrice);
+        }
+        if ($request->maxPrice) {
+            $query->where('price', '<=', $request->maxPrice);
+        }
+
+        $products = $query->get();
+
+        return response()->json($products);
+    }
 }
