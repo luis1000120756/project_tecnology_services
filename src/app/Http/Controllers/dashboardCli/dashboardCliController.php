@@ -14,7 +14,7 @@ class dashboardCliController extends Controller
     {
         $user = Auth::user();
         $userName = $user->name;
-        return view('dashboardCli.dashboard', compact('userName'));
+        return view('dashboardCli.homePage.homePage', compact('userName'));
     }
 
     public function getProducts()

@@ -50,8 +50,6 @@
                         </select>
                     </div>
 
-                    <button type="button" class="btn btn-primary" id="ajaxButton" onclick="pruebaAjax()">Prueba
-                        ajax</button>
 
                     {{-- Precio mínimo --}}
                     <div class="col-md-3">
@@ -88,7 +86,7 @@
         </div>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', () => {
             const categorySelect = document.getElementById('category');
             const minPriceInput = document.getElementById('minPrice');
             const maxPriceInput = document.getElementById('maxPrice');
@@ -143,7 +141,7 @@
                                 <h5 class="card-title text-primary">${product.title}</h5>
                                 <p class="card-text text-secondary mb-3">${product.category}</p>
                                 <div class="mt-auto">
-                                    <a href="/dashboard/catalog/products/${product.id}" class="btn btn-primary w-100 btn-save">
+                                    <a href="/dashboardCli/products/${product.id}" class="btn btn-primary w-100 btn-save">
                                         <span class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true"></span>
                                         Ver más
                                     </a>

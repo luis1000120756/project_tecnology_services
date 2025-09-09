@@ -39,11 +39,15 @@
             margin: 0;
             padding: 0;
             transition: background-color 0.3s, color 0.3s;
+            /* Nuevo: Evita el desbordamiento horizontal en todo el cuerpo del documento */
+            overflow-x: hidden;
         }
 
         .dashboard-container {
             display: flex;
             min-height: 100vh;
+            /* Nuevo: Asegura que el contenedor ocupe el 100% del ancho del viewport */
+            width: 100%;
         }
 
         /* Sidebar */
@@ -77,7 +81,28 @@
             }
 
             .main-content {
+                /* Nuevo: El margen se elimina completamente en móviles para que ocupe todo el espacio */
                 margin-left: 0;
+            }
+
+            /* Nuevo: Asegura que el texto largo se rompa en varias líneas */
+            p,
+            h2,
+            h4,
+            .navbar-top {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+
+            /* Nuevo: Ajustes adicionales para la barra superior en móvil */
+            .navbar-top {
+                /* Alinear elementos a la izquierda para mejor visibilidad */
+                justify-content: flex-start;
+            }
+
+            /* Oculta el título del navbar en móviles para ahorrar espacio */
+            .navbar-top .navbar-brand {
+                display: none;
             }
         }
 
@@ -215,6 +240,32 @@
         .user-dropdown:hover .user-dropdown-content {
             display: block;
         }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 999;
+        }
+
+        .whatsapp-float a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .whatsapp-float a:hover {
+            transform: scale(1.1);
+        }
     </style>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
@@ -229,20 +280,20 @@
                 </a>
             </div>
             <ul class="sidebar-menu">
-                <li class="sidebar-menu-item"><a href="#" class="active"><i class="fas fa-home"></i> Inicio</a>
+                <li class="sidebar-menu-item"><a href="{{ route('dashboard.cli') }}" class="active"><i
+                            class="fas fa-home"></i> Inicio</a>
                 </li>
-                <li class="sidebar-menu-item"><a href="#"><i class="fas fa-box-open"></i> Gestión de Productos</a>
+                <li class="sidebar-menu-item"><a href="{{ route('dashboard.catalog.products') }}"><i
+                            class="fas fa-tags"></i> Catálogo de Productos</a>
                 </li>
-                <li class="sidebar-menu-item"><a href="#"><i class="fas fa-wrench"></i> Gestión de Servicios</a>
+                <li class="sidebar-menu-item"><a href="#"><i class="fas fa-wrench"></i>Servicios Tecnológicos</a>
                 </li>
                 <li class="sidebar-menu-item"><a href="#"><i class="fas fa-newspaper"></i> Gestión de Noticias</a>
                 </li>
                 <li class="sidebar-menu-item"><a href="#"><i class="fas fa-users"></i> Gestión de Clientes</a>
                 </li>
-                <li class="sidebar-menu-item"><a href="{{ route('dashboard.catalog.products') }}"><i
-                            class="fas fa-tags"></i> Catálogo de Productos</a></li>
-                <li class="sidebar-menu-item"><a href="#"><i class="fas fa-shopping-cart"></i> App Web para
-                        Vender</a></li>
+                <li class="sidebar-menu-item"><a href="#"><i class="fas fa-shopping-cart"></i> Software a la
+                        venta</a></li>
             </ul>
             <div class="mt-auto sidebar-footer">
                 <form action="{{ route('auth.logout') }}" method="POST">
@@ -253,7 +304,12 @@
                 </form>
             </div>
         </aside>
-
+        <div class="whatsapp-float">
+            <a href="https://wa.me/TUNUMERODETELEFONO?text=¡Hola!%20Me%20interesa%20obtener%20más%20información%20sobre%20sus%20servicios."
+                target="_blank">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
         <main class="main-content" id="main-content">
             <nav class="navbar-top">
                 <button class="toggle-btn" id="toggle-sidebar"><i class="fas fa-bars"></i></button>

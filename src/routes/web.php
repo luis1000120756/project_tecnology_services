@@ -30,6 +30,8 @@ Route::prefix('dashboardCli')->group(function () {
     Route::post('/products', [ProductController::class, 'createProduct'])->name('dashboard.catalog.products.create')->middleware('auth');
     Route::get('/products/{id}', [ProductController::class, 'getProductById'])->name('dashboard.catalog.products.id')->middleware('auth');
     Route::post('/products/filter', [ProductController::class, 'filterProducts'])->name('dashboard.catalog.products.filter')->middleware('auth');
+    //Routes section home
+    Route::get('/home', [dashboardCliController::class, 'home'])->name('dashboard.home')->middleware('auth');
 });
 
 Route::get('/layout', function () {
