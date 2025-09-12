@@ -286,11 +286,10 @@
                 <li class="sidebar-menu-item"><a href="{{ route('dashboard.catalog.products') }}"><i
                             class="fas fa-tags"></i> Catálogo de Productos</a>
                 </li>
-                <li class="sidebar-menu-item"><a href="#"><i class="fas fa-wrench"></i>Servicios Tecnológicos</a>
+                <li class="sidebar-menu-item"><a href="{{ route('dashboard.cli.services') }}"><i
+                            class="fas fa-wrench"></i>Servicios Tecnológicos</a>
                 </li>
-                <li class="sidebar-menu-item"><a href="#"><i class="fas fa-newspaper"></i> Gestión de Noticias</a>
-                </li>
-                <li class="sidebar-menu-item"><a href="#"><i class="fas fa-users"></i> Gestión de Clientes</a>
+                <li class="sidebar-menu-item"><a href="#"><i class="fas fa-newspaper"></i>Noticias</a>
                 </li>
                 <li class="sidebar-menu-item"><a href="#"><i class="fas fa-shopping-cart"></i> Software a la
                         venta</a></li>

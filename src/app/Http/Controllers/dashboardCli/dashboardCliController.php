@@ -22,4 +22,9 @@ class dashboardCliController extends Controller
         $products = ProductsProduct::all();
         return view('dashboardCli.productsPage.productPage', compact('products'));
     }
+
+    public function services()
+    {
+        return view('dashboardCli.servicesPage.servicesPage');
+    }
 }
