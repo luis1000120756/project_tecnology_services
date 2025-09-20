@@ -1,12 +1,17 @@
 <style>
     .spinner-overlay {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 10;
         display: none;
-        /* Oculto por defecto */
+        /* oculto por defecto */
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        /* flex para centrar */
+        justify-content: center;
+        align-items: center;
     }
 </style>
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -51,7 +56,7 @@
                         </div>
                     @endif
                     <div class="position-relative d-inline-block w-100">
-                        <button class="btn btn-success w-100" id="btnIngresa" type="submit">Ingresar</button>
+                        <button class="btn btn-primary w-100" id="btnIngresa" type="submit">Ingresar</button>
                         <div class="spinner-overlay" id="spinner">
                             <div class="spinner-border text-light" role="status">
                                 <span class="visually-hidden">Cargando...</span>

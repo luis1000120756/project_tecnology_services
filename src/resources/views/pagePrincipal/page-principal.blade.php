@@ -555,11 +555,12 @@
                             <input type="password" class="form-control" id="reg-password" name="password" required>
                         </div>
                         <div class="d-grid gap-2">
-                            <button type="submit" id="btnRegistrar" class="btn btn-primary btn-main">
-                                <span id="spinner" class="spinner-border spinner-border-sm d-none" role="status"
-                                    aria-hidden="true"></span>
-                                Registrarse
-                            </button>
+                         
+                            <div class="spinner-overlay" id="spinnerRegisterForm">
+                                <div class="spinner-border text-light" role="status">
+                                    <span class="visually-hidden">Cargando...</span>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
