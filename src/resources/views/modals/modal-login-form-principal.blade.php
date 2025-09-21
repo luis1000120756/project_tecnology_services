@@ -1,17 +1,26 @@
 <style>
+    .btn-with-spinner {
+        position: relative;
+        /* para que el spinner se posicione respecto al botón */
+    }
+
     .spinner-overlay {
         display: none;
         /* oculto por defecto */
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        /* centra en ambos ejes */
+        background: rgba(0, 0, 0, 0.4);
+        /* opcional: semitransparente */
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.5);
         display: flex;
-        /* flex para centrar */
         justify-content: center;
         align-items: center;
+        border-radius: .375rem;
+        /* para que respete los bordes del botón */
     }
 </style>
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -56,15 +65,27 @@
                         </div>
                     @endif
                     <div class="position-relative d-inline-block w-100">
-                        <button class="btn btn-primary w-100" id="btnIngresa" type="submit">Ingresar</button>
-                        <div class="spinner-overlay" id="spinner">
-                            <div class="spinner-border text-light" role="status">
-                                <span class="visually-hidden">Cargando...</span>
+                        <button class="btn btn-primary w-100 btn-with-spinner" id="btnIngresa" type="submit">
+                            Ingresar
+                            <div class="spinner-overlay" id="spinnerLoginForm" style="display:none; ">
+                                <div class="spinner-border text-light" role="status">
+                                    <span class="visually-hidden">Cargando...</span>
+                                </div>
                             </div>
-                        </div>
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+<script>
+    const spinner = document.getElementById('spinnerLoginForm');
+    const btnIngresa = document.getElementById('btnIngresa');
+
+    if (spinner && btnIngresa) {
+        btnIngresa.addEventListener('click', () => {
+            spinner.style.display = 'block'; // no block
+        });
+    }
+</script>

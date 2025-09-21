@@ -23,7 +23,7 @@
                      </div>
                      <div class="d-grid gap-2 position-relative">
                          <button type="submit" class="btn btn-primary" id="btnRegister">Registrarse</button>
-                         <div class="spinner-overlay" id="spinnerRegisterForm">
+                         <div class="spinner-overlay" id="spinnerRegisterForm" style="display:none; ">
                              <div class="spinner-border text-light" role="status">
                                  <span class="visually-hidden">Cargando...</span>
                              </div>

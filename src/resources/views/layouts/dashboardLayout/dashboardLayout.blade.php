@@ -350,7 +350,9 @@
             const themeBtn = document.getElementById("toggleTheme");
             const body = document.body;
 
+            // =========================
             // Sidebar toggle
+            // =========================
             toggleBtn?.addEventListener('click', () => sidebar.classList.toggle('show'));
 
             function handleSidebar() {
@@ -365,6 +367,9 @@
             handleSidebar();
             window.addEventListener('resize', handleSidebar);
 
+            // =========================
+            // User dropdown
+            // =========================
             userDropdown?.addEventListener('click', () => userDropdownContent.classList.toggle('d-block'));
 
             // =========================
@@ -387,8 +392,24 @@
                     themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
                 }
             });
+
+            // =========================
+            // Activar item del menú
+            // =========================
+            const menuLinks = document.querySelectorAll('.sidebar-menu-item a');
+
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    // Quitar "active" de todos
+                    menuLinks.forEach(l => l.classList.remove('active'));
+
+                    // Agregar "active" al que se hizo click
+                    this.classList.add('active');
+                });
+            });
         });
     </script>
+
 </body>
 
 </html>
