@@ -27,4 +27,10 @@ class dashboardCliController extends Controller
     {
         return view('dashboardCli.servicesPage.servicesPage');
     }
+
+    public function softwareForSale()
+    {
+        // dd('llego a controller');
+        return view('dashboardCli.softwareForSalePage.softwareForSalePage');
+    }
 }

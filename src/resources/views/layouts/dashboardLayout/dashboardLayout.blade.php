@@ -291,7 +291,8 @@
                 </li>
                 <li class="sidebar-menu-item"><a href="#"><i class="fas fa-newspaper"></i>Noticias</a>
                 </li>
-                <li class="sidebar-menu-item"><a href="#"><i class="fas fa-shopping-cart"></i> Software a la
+                <li class="sidebar-menu-item"><a href="{{ route('dashboard.cli.softwareForSale') }}"><i
+                            class="fas fa-shopping-cart"></i> Software a la
                         venta</a></li>
             </ul>
             <div class="mt-auto sidebar-footer">

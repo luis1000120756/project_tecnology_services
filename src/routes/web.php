@@ -34,6 +34,8 @@ Route::prefix('dashboardCli')->group(function () {
     Route::get('/home', [dashboardCliController::class, 'home'])->name('dashboard.home')->middleware('auth');
     //Routes section services
     Route::get('/services', [dashboardCliController::class, 'services'])->name('dashboard.cli.services')->middleware('auth');
+    //Routes section software for sale
+    Route::get('/softwareForSale', [dashboardCliController::class, 'softwareForSale'])->name('dashboard.cli.softwareForSale')->middleware('auth');
 });
 
 Route::get('/layout', function () {
