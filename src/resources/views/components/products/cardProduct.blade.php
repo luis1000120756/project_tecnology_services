@@ -4,7 +4,7 @@
             <img src="{{ $image }}" class="img-fluid rounded" alt="{{ $title }}">
         </div>
         <h5 class="card-title text-primary">{{ $title }}</h5>
-        <p class="card-text text-secondary mb-3">{{ $category }}</p>
+        <p class="card-text text-secondary mb-3">{{ $description }}</p>
         <div class="mt-auto">
             <!-- Botón con spinner -->
             <a href="{{ route('dashboard.catalog.products.id', $id) }}" class="btn btn-primary w-100 btn-save">

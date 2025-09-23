@@ -30,7 +30,7 @@ class dashboardCliController extends Controller
 
     public function softwareForSale()
     {
-        // dd('llego a controller');
-        return view('dashboardCli.softwareForSalePage.softwareForSalePage');
+        $softwareForSale = ProductsProduct::where('category', 'softwareForSale')->get();
+        return view('dashboardCli.softwareForSalePage.softwareForSalePage', compact('softwareForSale'));
     }
 }
