@@ -3,28 +3,19 @@
 namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateProductRequest;
 use App\Models\Products\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    // Obtener todos los productos
-    public function getProducts()
-    {
-        $products = Product::all();
-        return view('dashboardCli.productsPage.productPage', compact('products'));
-    }
+
 
     // Guardar un producto con varias imágenes
-    public function createProduct(Request $request)
+    public function createProduct(CreateProductRequest $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'category' => 'required|string|max:100',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric',
-            'imagesPath.*' => 'image|mimes:jpg,jpeg,png|max:2048',
-        ]);
 
         $imagePaths = [];
 
@@ -35,13 +26,11 @@ class ProductController extends Controller
             }
         }
 
-        $product = Product::create([
-            'title' => $request->title,
-            'category' => $request->category,
-            'description' => $request->description,
-            'price' => $request->price,
-            'image_path' => $imagePaths, // se guarda como JSON
-        ]);
+        $data = $request->validated();
+
+        $data['image_path'] = $imagePaths;
+
+        $product = Product::create($data);
         return redirect()->back()->with('productNew', $product);
     }
 
@@ -72,5 +61,37 @@ class ProductController extends Controller
         $products = $query->get();
 
         return response()->json($products);
+    }
+
+    public function addProductCar($id)
+    {
+        // Buscar el producto por ID
+        $product = Product::find($id);
+
+        if ($product) {
+            // Obtener el carrito de la sesión, o inicializarlo vacío
+            $productList = session('productList', []);
+
+            // Si el producto ya existe en el carrito, aumentar cantidad
+            if (isset($productList[$product->id]) && is_array($productList[$product->id])) {
+                $productList[$product->id]['quantity'] += 1;
+            } else {
+                // Si no existe, agregarlo con cantidad = 1
+                $productList[$product->id] = [
+                    'product_id' => $product->id,
+                    'quantity' => 1,
+                    'title' => $product->title,
+                ];
+            }
+
+            // Guardar el carrito actualizado en la sesión
+            session(['productList' => $productList]);
+
+            // Opcional: redirigir de vuelta con mensaje
+            return redirect()->back()->with('success', "$product->title agregado al carrito");
+        }
+
+        // Si no encuentra el producto, redirigir con error
+        return redirect()->back()->with('error', 'Producto no encontrado');
     }
 }

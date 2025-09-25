@@ -38,9 +38,15 @@
                         <h3 class="fw-bold mb-3" style="color: var(--primary-color);">
                             Precio: ${{ number_format($product->price, 0, ',', '.') }}
                         </h3>
-                        <button class="btn btn-primary w-100 btn-save">
-                            <i class="bi bi-cart-plus me-2"></i> Agregar al carrito
-                        </button>
+                        <a href="{{ route('dashboard.catalog.products.addCar', $product->id) }}"
+                            class="btn btn-primary w-100"><i class="bi bi-cart-plus me-2"></i> Agregar al
+                            carrito</a>
+                        <a href="https://wa.me/573001234567?text=Hola,%20quiero%20comprar%20el%20ProductoX" target="_blank"
+                            class="btn btn-success w-100 mt-2 d-flex align-items-center justify-content-center"
+                            style="font-weight: 600; font-size: 1rem; gap: 0.5rem;">
+                            <i class="bi bi-whatsapp"></i> Comprar por WhatsApp
+                        </a>
+
                     </div>
                 </div>
             </div>

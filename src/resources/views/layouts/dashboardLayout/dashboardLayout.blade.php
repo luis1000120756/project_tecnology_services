@@ -266,6 +266,85 @@
         .whatsapp-float a:hover {
             transform: scale(1.1);
         }
+
+        /* Mini carrito adaptado al dashboard */
+        .cart-dropdown {
+            background-color: var(--card-bg);
+            /* Mismo que cards y navbar */
+            color: var(--text-light);
+            /* Texto claro según tema */
+            border-radius: 12px;
+            padding: 10px;
+            width: 300px;
+            max-height: 350px;
+            overflow-y: auto;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+            transition: all 0.3s ease;
+            position: absolute;
+            right: 0;
+            top: 45px;
+            z-index: 1000;
+        }
+
+        /* Items del carrito */
+        .cart-dropdown .list-group-item {
+            background: transparent;
+            /* Se integra con el fondo */
+            color: var(--text-light);
+            border: none;
+            padding: 10px 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .cart-dropdown .list-group-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Botones */
+        .cart-dropdown .btn {
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .cart-dropdown .btn-primary {
+            background-color: var(--primary-color);
+            border: none;
+            color: var(--text-light);
+        }
+
+        .cart-dropdown .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .cart-dropdown .btn-danger {
+            background-color: #dc3545;
+            border: none;
+            color: var(--text-light);
+        }
+
+        .cart-dropdown .btn-danger:hover {
+            background-color: #a71d2a;
+        }
+
+        /* Animación aparición/desaparición */
+        .cart-dropdown.show {
+            display: block !important;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .cart-dropdown.hide {
+            opacity: 0;
+            transform: translateY(-15px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
     </style>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
@@ -311,7 +390,7 @@
             </a>
         </div>
         <main class="main-content" id="main-content">
-            <nav class="navbar-top">
+            <nav class="navbar-top d-flex justify-content-between align-items-center px-3 py-2">
                 <button class="toggle-btn" id="toggle-sidebar"><i class="fas fa-bars"></i></button>
                 <div class="navbar-brand d-none d-md-block">Bienvenido</div>
                 <span class="d-md-none fs-2">Bienvenido</span>
@@ -321,6 +400,40 @@
                     <button id="toggleTheme" class="btn btn-outline-light me-3">
                         <i class="fas fa-sun"></i>
                     </button>
+
+                    <!-- Botón de carrito con numerador -->
+                    <div class="btn btn-outline-light position-relative me-3" id="cart-button">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-count"
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {{ session('productList') ? count(session('productList')) : 0 }}
+                        </span>
+                    </div>
+
+                    <!-- Mini carrito -->
+                    <div id="cart-dropdown" class="cart-dropdown hide">
+                        <div class="cart-header d-flex justify-content-between align-items-center mb-2">
+                            <strong>Mi Carrito</strong>
+                            <button type="button" class="btn-close text-light" id="close-cart"></button>
+                        </div>
+                        <ul id="cart-items" class="list-group mb-2">
+                            @if (session('productList'))
+                                @foreach (session('productList') as $item)
+                                    <li class="list-group-item">
+                                        <span>{{ $item['title'] }} x {{ $item['quantity'] }}</span>
+                                        <div>
+                                            <a href="#" class="btn btn-sm btn-primary me-1">Ver</a>
+                                            <button class="btn btn-sm btn-danger remove-cart-btn"
+                                                data-id="{{ $item['product_id'] }}">Eliminar</button>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @else
+                                <li class="list-group-item">El carrito está vacío</li>
+                            @endif
+                        </ul>
+                    </div>
+
 
                     <div class="user-dropdown">
                         <button class="user-dropdown-btn"><i class="fas fa-user-circle"></i> Usuario
@@ -335,6 +448,7 @@
                     </div>
                 </div>
             </nav>
+
 
             @yield('content')
         </main>
@@ -408,6 +522,31 @@
                     this.classList.add('active');
                 });
             });
+
+            const cartButton = document.getElementById('cart-button');
+            const cartDropdown = document.getElementById('cart-dropdown');
+            const closeCart = document.getElementById('close-cart');
+
+            // Abrir/cerrar carrito con animación
+            cartButton.addEventListener('click', () => {
+                cartDropdown.classList.toggle('show');
+                cartDropdown.classList.toggle('hide');
+            });
+
+            // Botón de cierre
+            closeCart.addEventListener('click', () => {
+                cartDropdown.classList.remove('show');
+                cartDropdown.classList.add('hide');
+            });
+
+            // Cierra el carrito si se hace clic fuera
+            document.addEventListener('click', (e) => {
+                if (!cartButton.contains(e.target) && !cartDropdown.contains(e.target)) {
+                    cartDropdown.classList.remove('show');
+                    cartDropdown.classList.add('hide');
+                }
+            });
+
         });
     </script>
 

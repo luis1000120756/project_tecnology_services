@@ -36,7 +36,7 @@
                     'id' => $product->id,
                     'image' => $product->first_image_url,
                     'title' => $product->title,
-                    'category' => $product->category,
+                    'description' => $product->description,
                 ])
             </div>
         @empty

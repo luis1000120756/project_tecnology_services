@@ -14,12 +14,13 @@ class dashboardCliController extends Controller
     {
         $user = Auth::user();
         $userName = $user->name;
+        session()->forget('productList'); // elimina los valores antiguos
         return view('dashboardCli.homePage.homePage', compact('userName'));
     }
 
     public function getProducts()
     {
-        $products = ProductsProduct::all();
+        $products = ProductsProduct::where('category', '!=', 'softwareForSale')->get();
         return view('dashboardCli.productsPage.productPage', compact('products'));
     }
 
