@@ -368,7 +368,7 @@
                 <li class="sidebar-menu-item"><a href="{{ route('dashboard.cli.services') }}"><i
                             class="fas fa-wrench"></i>Servicios Tecnológicos</a>
                 </li>
-                <li class="sidebar-menu-item"><a href="#"><i class="fas fa-newspaper"></i>Noticias</a>
+                <li class="sidebar-menu-item"><a href="{{ route('dashboard.cli.news') }}"><i class="fas fa-newspaper"></i>Noticias</a>
                 </li>
                 <li class="sidebar-menu-item"><a href="{{ route('dashboard.cli.softwareForSale') }}"><i
                             class="fas fa-shopping-cart"></i> Software a la
@@ -402,13 +402,16 @@
                     </button>
 
                     <!-- Botón de carrito con numerador -->
-                    <div class="btn btn-outline-light position-relative me-3" id="cart-button">
+                    <button id="cart-button" class="btn btn-outline-light position-relative me-3">
                         <i class="fas fa-shopping-cart"></i>
                         <span id="cart-count"
                             class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             {{ session('productList') ? count(session('productList')) : 0 }}
                         </span>
-                    </div>
+                    </button>
+
+
+
 
                     <!-- Mini carrito -->
                     <div id="cart-dropdown" class="cart-dropdown hide">
@@ -529,6 +532,7 @@
 
             // Abrir/cerrar carrito con animación
             cartButton.addEventListener('click', () => {
+                console.log('click en el button');
                 cartDropdown.classList.toggle('show');
                 cartDropdown.classList.toggle('hide');
             });
