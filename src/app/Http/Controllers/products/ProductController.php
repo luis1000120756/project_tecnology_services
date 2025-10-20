@@ -57,6 +57,10 @@ class ProductController extends Controller
         if ($request->maxPrice) {
             $query->where('price', '<=', $request->maxPrice);
         }
+        if($request->searchItem){
+            $searchTerm = strtolower($request->searchItem);
+            $query->whereRaw('LOWER(title) LIKE ?', ['%' . $searchTerm . '%']);
+        }
 
         $products = $query->get();
 

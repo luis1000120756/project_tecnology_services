@@ -10,23 +10,30 @@ use Illuminate\Support\Facades\Auth;
 
 class dashboardCliController extends Controller
 {
+    public function nameUser()
+    {
+        return Auth::user()->name;
+    }
     public function index()
     {
-        $user = Auth::user();
-        $userName = $user->name;
+        $userName = $this->nameUser();
         session()->forget('productList'); // elimina los valores antiguos
         return view('dashboardCli.homePage.homePage', compact('userName'));
     }
 
+
+
     public function getProducts()
     {
         $products = ProductsProduct::where('category', '!=', 'softwareForSale')->get();
-        return view('dashboardCli.productsPage.productPage', compact('products'));
+        $userName = $this->nameUser();
+        return view('dashboardCli.productsPage.productPage', compact(['products', 'userName']));
     }
 
     public function services()
     {
-        return view('dashboardCli.servicesPage.servicesPage');
+        $userName = $this->nameUser();
+        return view('dashboardCli.servicesPage.servicesPage', compact('userName'));
     }
 
     public function softwareForSale()

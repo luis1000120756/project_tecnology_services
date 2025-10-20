@@ -368,7 +368,8 @@
                 <li class="sidebar-menu-item"><a href="{{ route('dashboard.cli.services') }}"><i
                             class="fas fa-wrench"></i>Servicios Tecnológicos</a>
                 </li>
-                <li class="sidebar-menu-item"><a href="{{ route('dashboard.cli.news') }}"><i class="fas fa-newspaper"></i>Noticias</a>
+                <li class="sidebar-menu-item"><a href="{{ route('dashboard.cli.news') }}"><i
+                            class="fas fa-newspaper"></i>Noticias</a>
                 </li>
                 <li class="sidebar-menu-item"><a href="{{ route('dashboard.cli.softwareForSale') }}"><i
                             class="fas fa-shopping-cart"></i> Software a la
@@ -439,8 +440,8 @@
 
 
                     <div class="user-dropdown">
-                        <button class="user-dropdown-btn"><i class="fas fa-user-circle"></i> Usuario
-                            Administrador</button>
+                        <button class="user-dropdown-btn"><i
+                                class="fas fa-user-circle"></i>{{ $userName }}</button>
                         <div class="user-dropdown-content">
                             <a href="#"><i class="fas fa-user-cog"></i> Perfil</a>
                             <form action="{{ route('auth.logout') }}" method="POST">

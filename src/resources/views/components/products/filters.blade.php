@@ -68,7 +68,8 @@
                     {{-- Búsqueda --}}
                     <div class="col-md-3">
                         <label class="form-label fw-semibold text-light">Buscar</label>
-                        <input type="text" class="form-control bg-dark text-light border-primary shadow-sm rounded-3"
+                        <input id="searchInput" type="text"
+                            class="form-control bg-dark text-light border-primary shadow-sm rounded-3"
                             placeholder="Buscar producto...">
                     </div>
                 </div>
@@ -90,16 +91,20 @@
             const categorySelect = document.getElementById('category');
             const minPriceInput = document.getElementById('minPrice');
             const maxPriceInput = document.getElementById('maxPrice');
+            const searchInput = document.getElementById('searchInput');
 
             function aplicarFiltros() {
                 const category = categorySelect.value;
                 const priceMin = minPriceInput.value;
                 const priceMax = maxPriceInput.value;
+                const searchItem = searchInput.value.trim().toLowerCase();
+                console.log("Buscar:", searchItem);
 
                 const dataSend = {
                     category: category,
                     minPrice: priceMin,
-                    maxPrice: priceMax
+                    maxPrice: priceMax,
+                    searchItem: searchItem
                 };
 
                 const url = '/dashboardCli/products/filter';
@@ -159,5 +164,6 @@
             categorySelect.addEventListener('change', aplicarFiltros);
             minPriceInput.addEventListener('input', aplicarFiltros);
             maxPriceInput.addEventListener('input', aplicarFiltros);
+            searchInput.addEventListener('change', aplicarFiltros);
         });
     </script>
