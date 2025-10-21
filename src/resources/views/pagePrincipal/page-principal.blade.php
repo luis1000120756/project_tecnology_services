@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{{ asset('img/IconSuarPol.png') }}" type="image/png">
-    <title>SuarPol - Tecnología y Soluciones Corporativas</title>
+    <title>SuárezTec - Tecnología y Soluciones Corporativas</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -101,10 +101,11 @@
         }
 
         .hero-logo {
-            max-width: 150px;
+            max-width: 300px;
             margin-bottom: 20px;
             filter: drop-shadow(0 0 15px rgba(0, 123, 255, 0.8));
             animation: fadeInDown 1.5s ease-out forwards;
+            border-radius: 10px;
         }
 
         @keyframes fadeInDown {
@@ -535,7 +536,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="{{ asset('img/IconSuarPol.png') }}" alt="Logo SuarPol"> SuarPol
+                <img src="{{ asset('img/logo3.png') }}" alt="Logo SuarPol"> SuárezTec
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -573,15 +574,15 @@
     <main>
         <section class="hero text-center animate__animated animate__fadeIn">
             <div class="container">
-                <img src="{{ asset('img/IconSuarPol.png') }}" class="hero-logo" alt="Logo Adminstore">
-                <h1 class="animate__animated animate__fadeInUp">SuarPol - Soluciones Tecnológicas Integrales</h1>
+                <img src="{{ asset('img/logo3.png') }}" class="hero-logo" alt="Logo Adminstore">
+                <h1 class="animate__animated animate__fadeInUp">SuárezTec - Soluciones Tecnológicas Integrales</h1>
                 <p class="animate__animated animate__fadeInUp">Tu aliado estratégico en tecnología, desarrollo web y
                     servicios corporativos.</p>
                 <div>
                     <a href="#" class="btn btn-light btn-main px-4" data-bs-toggle="modal"
                         data-bs-target="#loginModal">
                         Iniciar Sesión
-                    </a>
+                    </a>0
                     <a href="#" class="btn btn-outline-light btn-main px-4" data-bs-toggle="modal"
                         data-bs-target="#registerModal">
                         Registrarse

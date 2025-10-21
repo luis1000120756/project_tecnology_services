@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{{ asset('img/IconSuarPol.png') }}" type="image/png">
-    <title>@yield('title', 'Dashboard - SuarPol')</title>
+    <title>@yield('title', 'Dashboard - SuárezTec')</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -354,8 +354,8 @@
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <a href="#" class="logo-container">
-                    <img src="{{ asset('img/IconSuarPol.png') }}" alt="Logo">
-                    <h4>SuarPol</h4>
+                    <img src="{{ asset('img/logo2.png') }}" alt="Logo">
+                    <h4>SuárezTec</h4>
                 </a>
             </div>
             <ul class="sidebar-menu">

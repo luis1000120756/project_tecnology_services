@@ -39,11 +39,13 @@ class dashboardCliController extends Controller
     public function softwareForSale()
     {
         $softwareForSale = ProductsProduct::where('category', 'softwareForSale')->get();
-        return view('dashboardCli.softwareForSalePage.softwareForSalePage', compact('softwareForSale'));
+        $userName = $this->nameUser();
+        return view('dashboardCli.softwareForSalePage.softwareForSalePage', compact('softwareForSale', 'userName'));
     }
 
     public function news()
     {
-        return view('dashboardCli.newsPage.newsPage');
+        $userName = $this->nameUser();
+        return view('dashboardCli.newsPage.newsPage', compact('userName'));
     }
 }
