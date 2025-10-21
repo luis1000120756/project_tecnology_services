@@ -30,3 +30,19 @@ v
 php -i | grep "max_execution_time"
 php -i | grep "upload_max_filesize"
 exit
+cls
+clear
+php artisan make:migration create_roles_table
+php artisan make:migration create_user_role_table
+php artisan migrate
+clear
+php artisan migrate
+php artisan migrate:reset
+php artisan migrate:reset
+php artisan migrate:fresh
+php artisan make:request createUserRequest
+php artisan make:model Role
+php artisan make:request LoginRequest
+cls
+clear
+exit

@@ -556,8 +556,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="btn btn-outline-light btn-sm btn-main px-4 ms-2"
-                            data-bs-toggle="modal" data-bs-target="#registerModal">
+                        <a href="#" class="btn btn-outline-light btn-sm btn-main px-4 ms-2" data-bs-toggle="modal"
+                            data-bs-target="#registerModal">
                             Registrarse
                         </a>
                     </li>

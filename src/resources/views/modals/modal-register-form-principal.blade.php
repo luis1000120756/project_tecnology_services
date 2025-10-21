@@ -11,7 +11,7 @@
                      @csrf
                      <div class="mb-3">
                          <label for="reg-nombre" class="form-label">Nombre completo</label>
-                         <input type="text" class="form-control" id="reg-nombre" name="nameUser" required>
+                         <input type="text" class="form-control" id="reg-nombre" name="name" required>
                      </div>
                      <div class="mb-3">
                          <label for="reg-email" class="form-label">Correo electrónico</label>

@@ -6,11 +6,11 @@
 
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="fw-bold text-light">Catálogo de Productos</h2>
-        <a href="#" class="btn btn-primary d-inline-flex align-items-center shadow-sm" data-bs-toggle="modal"
+        <a href="javascript:void(0)" class="btn btn-primary d-inline-flex align-items-center shadow-sm" data-bs-toggle="modal"
             data-bs-target="#addProductModal">
-            <i class="fas fa-plus me-2"></i>
-            Agregar Producto
+            <i class="fas fa-plus me-2"></i> Agregar Producto
         </a>
+
     </div>
 
     {{-- Modal de agregar producto --}}

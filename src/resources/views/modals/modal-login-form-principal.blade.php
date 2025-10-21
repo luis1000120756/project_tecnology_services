@@ -45,7 +45,7 @@
                     @endif
                     <div class="mb-3 text-start">
                         <label class="form-label">Nombre de usuario</label>
-                        <input type="text" id="inputName" name="nameUser" class="form-control"
+                        <input type="text" id="inputName" name="name" class="form-control"
                             placeholder="Ingresa tu nombre de usuario">
                     </div>
                     <div class="mb-3 text-start">
